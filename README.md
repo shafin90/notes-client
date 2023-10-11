@@ -1,8 +1,6 @@
-# React + Vite
+# Docuentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- pages and components details:
 
-Currently, two official plugins are available:
+* WelcomePage: This is the welcoming page of this web application. User will see the logo and branding for some seconds in this page and then will be redirected to the home page.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
