@@ -5,7 +5,7 @@ import CustomNavbar from "../../components/CustomNavbar/CustomNavbar";
 
 const Home = () => {
     return (
-        <div className=" bg-orange-50 w-screen h-screen">
+        <div className=" bg-sky-50 w-screen h-screen">
             <CustomNavbar></CustomNavbar>
             
         </div>

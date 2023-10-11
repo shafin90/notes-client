@@ -7,6 +7,9 @@ import {
 import './index.css'
 import WelcomePage from './pages/WelcomePage/WelcomePage.jsx';
 import Home from './pages/Home/Home';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import AuthProvider from './components/AuthProvider/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -14,13 +17,23 @@ const router = createBrowserRouter([
     element: <WelcomePage></WelcomePage>,
   },
   {
-    path:'/home',
-    element:<Home></Home>
+    path: '/home',
+    element: <Home></Home>
+  },
+  {
+    path: '/login',
+    element: <LoginPage></LoginPage>
+  },
+  {
+    path: '/registration',
+    element: <RegistrationPage></RegistrationPage>
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

@@ -27,8 +27,8 @@ const WelcomePage = () => {
     },1500) 
 
     return (
-        <div className=" bg-orange-100 h-screen flex justify-center items-center overflow-hidden">
-            <h1 style={style} className=" text-6xl font-bold text-gray-600">MemoTack</h1>
+        <div className=" bg-sky-50 h-screen flex justify-center items-center overflow-hidden">
+            <h1 style={style} className=" text-6xl font-bold  text-sky-700">MemoTack</h1>
         </div>
     );
 };
