@@ -6,7 +6,7 @@ import { authContext } from '../AuthProvider/AuthProvider';
 
 const CustomNavbar = () => {
     // Recieving state and function from AuthProvider through context API
-    const { user, handleLogout } = useContext(authContext);
+    const { user, handleLogout, setNote, setNoteTitle, setSelectedNoteId } = useContext(authContext);
 
     // declaring useNavigate hook
     const navigate = useNavigate()
@@ -14,6 +14,15 @@ const CustomNavbar = () => {
     // redirect user to login page so that user can login account or create account from registration page
     const login = () => {
         navigate('/login')
+    }
+
+    // Function to redirect user to note writing page
+    const redirectTOWriteNote = ()=>{
+        // Clearing note and noteTitle before redirecting user. Because, during updating note, note and notTitle value had been updated.
+        setNote(null); 
+        setNoteTitle(null);
+        setSelectedNoteId(null); // making selectedId null. Because if user take an attept to update note, but desnt do that, setSelectedId will remain have a value. In that case user will see update button instead of post button when user will go for post a note.
+        navigate('/note');
     }
 
     return (
@@ -31,7 +40,7 @@ const CustomNavbar = () => {
                         ' me-4 text-sky-500 text-4xl hover:text-5xl transition-all cursor-pointer':
                         'hidden'
                         }
-                        onClick={e=>navigate('/note')} // redirect user to the note writing page
+                        onClick={redirectTOWriteNote} // redirect user to the note writing page
                         >
 
                         </AiFillFileAdd>

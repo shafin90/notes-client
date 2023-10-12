@@ -19,6 +19,8 @@ const AuthProvider = ({ children }) => {
     const [note, setNote] = useState(null) // particular note that is being wriiten by user
     const [noteTitle, setNoteTitle] = useState(null) // Title of the note
     const [reload, setReload] = useState(true) // When delete happens, then all the note collection need to be fetched again. This stats will play the role of dependancy there. When delete operation done, this state's value will be changed.
+    const [selectedNoteId, setSelectedNoteId] = useState(null); // when user try bto update any note, then  user select that note from the list. that note's id will be stored here.
+
 
     // Function to create account, login account====================================================================
 
@@ -113,7 +115,7 @@ const AuthProvider = ({ children }) => {
                 const remaining = noteslist.filter(item => item._id !== _id);
                 setNotesList(remaining);
             })
-        setReload(!reload)    
+        setReload(!reload)
     }
 
     // 3. Function to Get data =============
@@ -125,10 +127,25 @@ const AuthProvider = ({ children }) => {
     }
 
     // 4. Function to Update data===========
-    const handleUpdate = () => {
+    const handleUpdate = (selectedNoteId) => {
+        fetch(`http://localhost:5000/addNote/${selectedNoteId}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({title: noteTitle, note: note, email: user?.email})
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    alert('user updated successfully')
+                }
+            })
+
+            setSelectedNoteId(null);
 
     }
-
 
 
     // Observer==========================================================================================================
@@ -174,7 +191,11 @@ const AuthProvider = ({ children }) => {
         setNoteTitle,
         noteslist,
         reload,
-        setReload
+        setReload,
+        noteTitle,
+        note,
+        setSelectedNoteId,
+        selectedNoteId
     }
 
     return (
