@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { app } from "../../../firebase.config";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 export const authContext = createContext();
 const auth = getAuth(app);
@@ -26,17 +27,24 @@ const AuthProvider = ({ children }) => {
 
     // 1. Function to create account======
     const handleRegister = () => {
+        console.log(1234)
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                setUser(user)
+                // Signed up 
+                const users = userCredential.user;
+                // ...
+                setUser(users)
+                alert('Registration successfull')
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                setError(errorMessage)
+                alert('something wrong')
+                // ..
             });
     }
+
+
 
     // 2. Function to login account with email, password======
     const handleLogin = () => {
@@ -45,12 +53,14 @@ const AuthProvider = ({ children }) => {
                 // Signed in 
                 const user = userCredential.user;
                 setUser(user)
+                alert('login successfull')
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage)
+                alert('something wrong')
             });
     }
 
@@ -64,7 +74,7 @@ const AuthProvider = ({ children }) => {
                 // The signed-in user info.
                 const user = result.user;
                 setUser(user)
-                // IdP data available using getAdditionalUserInfo(result)
+                console.log(user)
                 // ...
             }).catch((error) => {
                 // Handle Errors here.
@@ -76,12 +86,13 @@ const AuthProvider = ({ children }) => {
             });
 
     }
-
+    console.log(user)
     // 4. Function to logout account========
     const handleLogout = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
             setUser(null)
+            alert('logout successfull')
         }).catch((error) => {
             // An error happened.
             setError(error)
@@ -102,6 +113,8 @@ const AuthProvider = ({ children }) => {
         })
             .then(res => res.json())
             .then(data => console.log(data))
+        
+        alert('note added')
 
     }
 
@@ -116,6 +129,7 @@ const AuthProvider = ({ children }) => {
                 setNotesList(remaining);
             })
         setReload(!reload)
+        alert('delete the note')
     }
 
     // 3. Function to Get data =============
@@ -127,13 +141,14 @@ const AuthProvider = ({ children }) => {
     }
 
     // 4. Function to Update data===========
-    const handleUpdate = (selectedNoteId) => {
-        fetch(`http://localhost:5000/addNote/${selectedNoteId}`, {
+    const handleUpdate = () => {
+        console.log(selectedNoteId)
+        fetch(`http://localhost:5000/updateNote/${selectedNoteId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({title: noteTitle, note: note, email: user?.email})
+            body: JSON.stringify({ title: noteTitle, note: note, email: user?.email })
         })
             .then(res => res.json())
             .then(data => {
@@ -143,9 +158,11 @@ const AuthProvider = ({ children }) => {
                 }
             })
 
-            setSelectedNoteId(null);
+        setSelectedNoteId(null);
+        setReload(!reload);
 
     }
+
 
 
     // Observer==========================================================================================================
@@ -165,7 +182,6 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    console.log(noteslist)
     // all state and function that will be used all over the application==================================================
     const passedValue = {
         name,
@@ -201,6 +217,7 @@ const AuthProvider = ({ children }) => {
     return (
         <authContext.Provider value={passedValue}>
             {children}
+
         </authContext.Provider>
     );
 };

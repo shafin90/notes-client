@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import AuthProvider from './components/AuthProvider/AuthProvider';
 import CreateNote from './pages/CreateNote/CreateNote';
+import ViewNote from './pages/ViewNote/ViewNote';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
   {
     path:'/note',
     element:<CreateNote></CreateNote>
+  },
+  {
+    path:'/note/:id',
+    element:<ViewNote></ViewNote>,
+    loader:({params})=>fetch(`http://localhost:5000/noteCollection/${params.id}`)
+
   }
 ]);
 

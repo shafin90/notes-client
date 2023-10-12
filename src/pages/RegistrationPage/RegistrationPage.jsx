@@ -8,8 +8,7 @@ const RegistrationPage = () => {
 
     // State declaration for this component
     const [error, setError] = useState(null);
-    const [visibility, setVisibility] = useState(false); // when password==confirmPassword and password.length>=8 then, visibility becomes true
-
+   
     // declaring useNavigate hook
     const navigate = useNavigate()
 
@@ -17,37 +16,28 @@ const RegistrationPage = () => {
     if (user !== null) {
         navigate('/home')
     }
-
+console.log(user)
     // Function to handle registration process. When every details of the from is perfectly given, password and confirm password are same and password length is atleast 8 characters, visibility state becomes true
-    const registration = ()=>{
-        if(visibility){
-            handleRegister();
-        }
-        else{
-            alert('Fillup the form correctly')
-        }
-    }
-    
-    // Submit the form and check the password ok or not
-    const handleSubmit = (e) => {
+    const registration = (e) => {
         e.preventDefault();
-
+      
         if (password.length < 8) {
             setError('Password must be at least 8 characters long.');
             setTimeout(() => setError(null), 3000);
-            setVisibility(true)
+            setVisibility(false)
+            alert('password must be atleast 8 characters')
         } else if (password !== confirmPassword) {
-            setVisibility(true)
+            setVisibility(false)
             setError('Passwords do not match.');
             setTimeout(() => setError(null), 3000);
+            alert('password and confirm password doesnt matches')
         } else {
-            // Perform your registration logic here
-            // You can send the formData to your API or perform validation
-            // console.log('Registration data:');
-            setVisibility(false);
+            
+            handleRegister();
         }
-    };
+    }
 
+    
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-96">
@@ -55,7 +45,7 @@ const RegistrationPage = () => {
                 {error && (
                     <div className="text-red-500 text-sm mb-4">{error}</div>
                 )}
-                <form onSubmit={handleSubmit}>
+                <form >
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
                         <input
@@ -110,7 +100,7 @@ const RegistrationPage = () => {
                     </div>
                     <div className="mb-6">
                         <button
-                            type="submit"
+                    
                             className=" bg-sky-700 hover:bg-sky-900 text-white font-semibold py-2 px-4 rounded-lg w-full"
                             onClick={registration}
                         >

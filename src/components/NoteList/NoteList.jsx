@@ -4,6 +4,7 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { AiFillDelete } from 'react-icons/ai'
+import {AiOutlineFolderView} from 'react-icons/ai'
 import { GrDocumentUpdate } from 'react-icons/gr'
 import { useNavigate } from "react-router-dom";
 const NoteList = () => {
@@ -32,6 +33,11 @@ const NoteList = () => {
         navigate('/note'); // redirect user to the note writing page
     }
 
+    // Function to view particular note
+    const viewNote = (id)=>{
+        console.log(id)
+        navigate(`/note/${id}`);
+    }
 
 
     return (
@@ -43,6 +49,7 @@ const NoteList = () => {
                     </h1>
 
                     <div className=" flex justify-between items-center">
+                        <AiOutlineFolderView onClick={event=>viewNote(e._id)} className=" text-3xl cursor-pointer text-sky-800 me-3"></AiOutlineFolderView>
                         <GrDocumentUpdate onClick={()=>update(e)} className=" text-sky-800 text-2xl cursor-pointer"></GrDocumentUpdate>
                         <AiFillDelete onClick={() => handleDelete(e._id)} className=" text-red-800 text-2xl  ms-4 cursor-pointer"></AiFillDelete>
                     </div>

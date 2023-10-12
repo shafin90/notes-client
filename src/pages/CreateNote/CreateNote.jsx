@@ -22,6 +22,7 @@ const CreateNote = () => {
 
     const update = () => {
         handleUpdate();
+        navigate('/home')
     }
 
 
