@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
     const [noteslist, setNotesList] = useState(null) // List of all notes
     const [note, setNote] = useState(null) // particular note that is being wriiten by user
     const [noteTitle, setNoteTitle] = useState(null) // Title of the note
+    const [reload, setReload] = useState(true) // When delete happens, then all the note collection need to be fetched again. This stats will play the role of dependancy there. When delete operation done, this state's value will be changed.
 
     // Function to create account, login account====================================================================
 
@@ -103,15 +104,23 @@ const AuthProvider = ({ children }) => {
     }
 
     // 2. Function to handle Delete operation========
-    const handleDelete = () => {
-
+    const handleDelete = (_id) => {
+        fetch(`http://localhost:5000/deleteNote/${_id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                const remaining = noteslist.filter(item => item._id !== _id);
+                setNotesList(remaining);
+            })
+        setReload(!reload)    
     }
 
     // 3. Function to Get data =============
     const handleGetData = () => {
         fetch('http://localhost:5000/noteCollection')
-        .then(res=>res.json())
-        .then(data=>setNotesList(data))
+            .then(res => res.json())
+            .then(data => setNotesList(data))
 
     }
 
@@ -139,7 +148,7 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-
+    console.log(noteslist)
     // all state and function that will be used all over the application==================================================
     const passedValue = {
         name,
@@ -163,7 +172,9 @@ const AuthProvider = ({ children }) => {
         handleGetData,
         setNote,
         setNoteTitle,
-        noteslist
+        noteslist,
+        reload,
+        setReload
     }
 
     return (
