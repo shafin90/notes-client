@@ -25,7 +25,16 @@ const CustomNavbar = () => {
                 </div>
 
                 <div className="navbar-end">
-                    <AiFillFileAdd className=' me-4 text-sky-500 text-4xl hover:text-5xl transition-all cursor-pointer'></AiFillFileAdd>
+                    <AiFillFileAdd 
+                    className= {
+                        user!==null?
+                        ' me-4 text-sky-500 text-4xl hover:text-5xl transition-all cursor-pointer':
+                        'hidden'
+                        }
+                        onClick={e=>navigate('/note')} // redirect user to the note writing page
+                        >
+
+                        </AiFillFileAdd>
                     {user === null
                         ?
                         <a className="btn bg-sky-700 hover:bg-sky-800 text-slate-50 transition-all" onClick={login}>Login</a>

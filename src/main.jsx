@@ -10,6 +10,7 @@ import Home from './pages/Home/Home';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import AuthProvider from './components/AuthProvider/AuthProvider';
+import CreateNote from './pages/CreateNote/CreateNote';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/registration',
     element: <RegistrationPage></RegistrationPage>
+  },
+  {
+    path:'/note',
+    element:<CreateNote></CreateNote>
   }
 ]);
 
