@@ -104,7 +104,7 @@ const AuthProvider = ({ children }) => {
 
     // 1. Function to handle Post method========
     const handlePost = () => {
-        fetch('http://localhost:5000/addNote', {
+        fetch('https://notes-server-ygw4.vercel.app/addNote', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -120,7 +120,7 @@ const AuthProvider = ({ children }) => {
 
     // 2. Function to handle Delete operation========
     const handleDelete = (_id) => {
-        fetch(`http://localhost:5000/deleteNote/${_id}`, {
+        fetch(`https://notes-server-ygw4.vercel.app/deleteNote/${_id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -134,7 +134,7 @@ const AuthProvider = ({ children }) => {
 
     // 3. Function to Get data =============
     const handleGetData = () => {
-        fetch('http://localhost:5000/noteCollection')
+        fetch('https://notes-server-ygw4.vercel.app/noteCollection')
             .then(res => res.json())
             .then(data => setNotesList(data))
 
@@ -143,7 +143,7 @@ const AuthProvider = ({ children }) => {
     // 4. Function to Update data===========
     const handleUpdate = () => {
         console.log(selectedNoteId)
-        fetch(`http://localhost:5000/updateNote/${selectedNoteId}`, {
+        fetch(`https://notes-server-ygw4.vercel.app/updateNote/${selectedNoteId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

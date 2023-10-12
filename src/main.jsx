@@ -37,7 +37,7 @@ const router = createBrowserRouter([
   {
     path:'/note/:id',
     element:<ViewNote></ViewNote>,
-    loader:({params})=>fetch(`http://localhost:5000/noteCollection/${params.id}`)
+    loader:({params})=>fetch(`https://notes-server-ygw4.vercel.app/noteCollection/${params.id}`)
 
   }
 ]);
