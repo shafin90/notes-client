@@ -1,8 +1,6 @@
 <<<<<<< HEAD
 # Live link- https://notes-client-ten.vercel.app/
 =======
-# Live Link - https://notes-client-ten.vercel.app/
->>>>>>> 3dc9b61dd3786578833a36e2dda12f0a978872f8
 
 - pages and components details:
 
