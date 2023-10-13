@@ -47,7 +47,7 @@ const LoginPage = () => {
                         Login
                     </button>
                 </div>
-                <div className="text-center">
+                {/* <div className="text-center">
                     <p className="text-gray-600 text-sm">Or</p>
                     <button
                         className=" flex justify-center items-center mt-2 transition-all bg-red-700 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-lg w-full"
@@ -56,7 +56,7 @@ const LoginPage = () => {
                         <AiOutlineGoogle className=' me-2 text-2xl'></AiOutlineGoogle>
                         Sign in with Google
                     </button>
-                </div>
+                </div> */}
                 <p className=' text-sm mt-4  text-slate-500'>Dont have an account?<Link to='/registration' className=' font-bold ms-2'>Registration</Link> </p>
             </div>
         </div>
