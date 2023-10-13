@@ -1,4 +1,4 @@
-# Docuentation
+# Live link- https://notes-client-ten.vercel.app/
 
 - pages and components details:
 
