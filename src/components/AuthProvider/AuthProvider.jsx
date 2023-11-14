@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
     const [noteTitle, setNoteTitle] = useState(null) // Title of the note
     const [reload, setReload] = useState(true) // When delete happens, then all the note collection need to be fetched again. This stats will play the role of dependancy there. When delete operation done, this state's value will be changed.
     const [selectedNoteId, setSelectedNoteId] = useState(null); // when user try bto update any note, then  user select that note from the list. that note's id will be stored here.
-
+    const [toastCounter, setToastCounter] = useState(null) // Count the number of toast; 1= registration, 2= login, 3=add note, 4 = update note, 5 delete note, 6= logout null = stop
 
     // Function to create account, login account====================================================================
 
@@ -34,7 +34,9 @@ const AuthProvider = ({ children }) => {
                 const users = userCredential.user;
                 // ...
                 setUser(users)
-                alert('Registration successfull')
+                // alert('Registration successfull')
+                setToastCounter(1)
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -53,8 +55,9 @@ const AuthProvider = ({ children }) => {
                 // Signed in 
                 const user = userCredential.user;
                 setUser(user)
-                alert('login successfull')
+
                 // ...
+                setToastCounter(2)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -92,7 +95,7 @@ const AuthProvider = ({ children }) => {
         signOut(auth).then(() => {
             // Sign-out successful.
             setUser(null)
-            alert('logout successfull')
+            setToastCounter(6)
         }).catch((error) => {
             // An error happened.
             setError(error)
@@ -113,8 +116,8 @@ const AuthProvider = ({ children }) => {
         })
             .then(res => res.json())
             .then(data => console.log(data))
-        
-        alert('note added')
+
+        setToastCounter(3)
 
     }
 
@@ -129,7 +132,7 @@ const AuthProvider = ({ children }) => {
                 setNotesList(remaining);
             })
         setReload(!reload)
-        alert('delete the note')
+        setToastCounter(5)
     }
 
     // 3. Function to Get data =============
@@ -160,6 +163,7 @@ const AuthProvider = ({ children }) => {
 
         setSelectedNoteId(null);
         setReload(!reload);
+        setToastCounter(4)
 
     }
 
@@ -181,6 +185,7 @@ const AuthProvider = ({ children }) => {
         // Clean up the subscription when the component unmounts
         return () => unsubscribe();
     }, []);
+
 
     // all state and function that will be used all over the application==================================================
     const passedValue = {
@@ -211,12 +216,19 @@ const AuthProvider = ({ children }) => {
         noteTitle,
         note,
         setSelectedNoteId,
-        selectedNoteId
+        selectedNoteId,
+        setToastCounter,
+        toastCounter
     }
 
     return (
         <authContext.Provider value={passedValue}>
+
+            {/* Same as */}
             {children}
+
+
+
 
         </authContext.Provider>
     );

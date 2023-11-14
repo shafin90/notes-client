@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../components/AuthProvider/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
 
 const RegistrationPage = () => {
     // Recieving data from AuthProvider component through context API
@@ -8,7 +9,7 @@ const RegistrationPage = () => {
 
     // State declaration for this component
     const [error, setError] = useState(null);
-   
+
     // declaring useNavigate hook
     const navigate = useNavigate()
 
@@ -16,11 +17,11 @@ const RegistrationPage = () => {
     if (user !== null) {
         navigate('/home')
     }
-console.log(user)
+
     // Function to handle registration process. When every details of the from is perfectly given, password and confirm password are same and password length is atleast 8 characters, visibility state becomes true
     const registration = (e) => {
         e.preventDefault();
-      
+
         if (password.length < 8) {
             setError('Password must be at least 8 characters long.');
             setTimeout(() => setError(null), 3000);
@@ -32,12 +33,13 @@ console.log(user)
             setTimeout(() => setError(null), 3000);
             alert('password and confirm password doesnt matches')
         } else {
-            
+
             handleRegister();
+            
         }
     }
 
-    
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-96">
@@ -100,7 +102,7 @@ console.log(user)
                     </div>
                     <div className="mb-6">
                         <button
-                    
+
                             className=" bg-sky-700 hover:bg-sky-900 text-white font-semibold py-2 px-4 rounded-lg w-full"
                             onClick={registration}
                         >
@@ -110,6 +112,21 @@ console.log(user)
                 </form>
                 <p className=' text-sm text-slate-500'>Already have an account? <Link className=' font-bold' to='/login'>Login</Link></p>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            {/* Same as */}
+            <ToastContainer />
         </div>
     );
 };

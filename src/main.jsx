@@ -5,13 +5,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import WelcomePage from './pages/WelcomePage/WelcomePage.jsx';
-import Home from './pages/Home/Home';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import WelcomePage from './components/WelcomePage/WelcomePage';
+import Home from './components/Home/Home';
+import LoginPage from './components/LoginPage/LoginPage';
+import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+import CreateNote from './components/CreateNote/CreateNote';
+import ViewNote from './components/ViewNote/ViewNote';
 import AuthProvider from './components/AuthProvider/AuthProvider';
-import CreateNote from './pages/CreateNote/CreateNote';
-import ViewNote from './pages/ViewNote/ViewNote';
+
 
 const router = createBrowserRouter([
   {
